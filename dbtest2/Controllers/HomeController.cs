@@ -71,7 +71,6 @@ namespace dbtest2.Controllers
 
 
                     cmd.Parameters.Add(new OracleParameter("@carnum", carnum));
-                    //cmd.Parameters["carnum"].Value = 
 
 
                     // 결과 리더 객체를 리턴
