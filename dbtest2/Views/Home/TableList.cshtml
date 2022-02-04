@@ -27,17 +27,16 @@
                         <th>Car_Number</th>
                         <th>In_Time</th>
                         <th>Out_Time</th>
-                        <th>City</th>
+                        @*<th>City</th>*@
                         </thead>
                         <tbody>
                             @foreach (System.Data.DataRow row in dt.Rows)
                             {
                                 <tr>
+                                    <td>@row["car_id"]</td>
                                     <td>@row["carnum"]</td>
                                     <td>@row["intime"]</td>
                                     <td>@row["outtime"]</td>
-                                    <td></td>
-                                    <td></td>
                                 </tr>
                             }
                         </tbody>

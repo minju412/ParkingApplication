@@ -57,7 +57,7 @@ namespace dbtest2.Controllers
                     cmd.Connection = conn;
 
                     // 파라미터 바인딩
-                    cmd.CommandText = @"SELECT * FROM c_table";
+                    cmd.CommandText = "SELECT * FROM c_table ORDER BY car_id ASC";
                     //cmd.CommandText = @"
                     //SELECT 
                     //    C.carnum
