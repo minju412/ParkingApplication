@@ -52,14 +52,31 @@ namespace dbtest2.Controllers
                 //OracleCommand cmd = new OracleCommand();
                 using (var cmd = new OracleCommand())
                 {
+                    string carnum = "1234";
+
                     cmd.Connection = conn;
 
                     // 파라미터 바인딩
-                    cmd.CommandText = "SELECT * FROM c_table";
-                    cmd.Parameters.Add(new OracleParameter("carnum", "5678"));
+                    cmd.CommandText = @"SELECT * FROM c_table";
+                    //cmd.CommandText = @"
+                    //SELECT 
+                    //    C.carnum
+                    //    ,C.intime
+                    //    ,C.outtime
+                    //FROM
+                    //    c_table C
+                    //WHERE
+                    //    C.carnum = @carnum
+                    //";
+
+
+                    cmd.Parameters.Add(new OracleParameter("@carnum", carnum));
+                    //cmd.Parameters["carnum"].Value = 
+
 
                     // 결과 리더 객체를 리턴
-                    OracleDataReader reader = cmd.ExecuteReader();
+                    //OracleDataReader reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
                     dt.Load(reader);
                 }

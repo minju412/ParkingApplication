@@ -1,15 +1,15 @@
-﻿@{
+﻿@*@{
     ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<p>Use this area to provide additional information.</p>*@
 
 
 
 
-<!--@{
+@{
     var dt = ViewData["dt"] as System.Data.DataTable;
 }
 <div class="container-fluid">
@@ -24,9 +24,9 @@
                     <table class="table table-hover table-striped">
                         <thead>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Salary</th>
-                        <th>Country</th>
+                        <th>Car_Number</th>
+                        <th>In_Time</th>
+                        <th>Out_Time</th>
                         <th>City</th>
                         </thead>
                         <tbody>
@@ -40,7 +40,7 @@
                                     <td></td>
                                 </tr>
                             }
-                        </tbody>-->
+                        </tbody>
                         @*<tbody>
                                 <tr>
                                     <td>1</td>
@@ -85,9 +85,9 @@
                                     <td>Gloucester</td>
                                 </tr>
                             </tbody>*@
-                    <!--</table>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</div>-->
+</div>
