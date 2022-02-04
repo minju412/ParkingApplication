@@ -9,8 +9,10 @@
 //using System.Linq;
 //using System.Threading.Tasks;
 //using System.Web.Mvc;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,9 +26,47 @@ namespace dbtest2.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult TableList()
         {
-            ViewBag.Message = "Your application description page.";
+            var dt = new DataTable();
+
+            // 오라클 연결 문자열        
+            //string _strConn = "Data Source=parkingLot;Integrated Security=yes;";
+            //string _strConn = "Data Source=parkingLot;User Id=ann;Password=111111;Integrated Security=no;";
+            string _strConn = "Data Source=(DESCRIPTION=(ADDRESS_LIST=" +
+              "(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))" +
+              "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=ann;Password=111111;";
+            //string _strConn = "Data Source=localhost;User ID=ann;Password=111111;Unicode=True";
+
+
+
+            // 오라클 연결
+            // 오라클 서버 연결 객체 생성
+            //using (OracleConnection conn = new OracleConnection(_strConn))
+            using (var conn = new OracleConnection(_strConn))
+            {
+                // 연결
+                conn.Open();
+
+                // 명령 객체 생성
+                //OracleCommand cmd = new OracleCommand();
+                using (var cmd = new OracleCommand())
+                {
+                    cmd.Connection = conn;
+
+                    // 파라미터 바인딩
+                    cmd.CommandText = "SELECT * FROM c_table";
+                    cmd.Parameters.Add(new OracleParameter("carnum", "5678"));
+
+                    // 결과 리더 객체를 리턴
+                    OracleDataReader reader = cmd.ExecuteReader();
+
+                    dt.Load(reader);
+                }
+
+            }
+
+            ViewData["dt"] = dt;
 
             return View();
         }
