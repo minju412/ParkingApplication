@@ -15,7 +15,7 @@
                         <th>ID</th>
                         <th>Car_Number</th>
                         <th>In_Time</th>
-                        <th>Out_Time</th>
+                        @*<th>Out_Time</th>*@
                         </thead>
                         <tbody>
                             @foreach (System.Data.DataRow row in dt.Rows)
@@ -24,7 +24,7 @@
                                     <td>@row["car_id"]</td>
                                     <td>@row["carnum"]</td>
                                     <td>@row["intime"]</td>
-                                    <td>@row["outtime"]</td>
+                                    @*<td>@row["outtime"]</td>*@
                                 </tr>
                             }
                         </tbody>
