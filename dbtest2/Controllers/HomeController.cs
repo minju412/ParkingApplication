@@ -106,7 +106,9 @@ namespace dbtest2.Controllers
 
                     cmd.Connection = conn;
 
-                    cmd.CommandText = "INSERT INTO c_table VALUES (11,'1346','15:00','16:00')"; // (@car_id,@carnum,@intime,@outtime)";
+                    cmd.CommandText = "INSERT INTO c_table VALUES (11,'1346','15:00','16:00')"; 
+                    //cmd.CommandText = "INSERT INTO c_table (carnum,intime,outtime) SELECT @car_id,@carnum,@intime,@outtime";
+
 
                     cmd.ExecuteNonQuery();
 
