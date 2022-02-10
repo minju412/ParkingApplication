@@ -1,6 +1,5 @@
-﻿@{
-    var dt = ViewData["dt"] as System.Data.DataTable;
-}
+﻿@model List<dbtest2.Models.Car>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -15,32 +14,38 @@
                         <th>ID</th>
                         <th>Car_Number</th>
                         <th>In_Time</th>
-                        @*<th>Out_Time</th>*@
+                        <th>@*Out_Time*@</th>
                         </thead>
                         <tbody>
-                            @foreach (System.Data.DataRow row in dt.Rows)
+                            @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@row["car_id"]</td>
-                                    <td>@row["carnum"]</td>
-                                    <td>@row["intime"]</td>
-                                    @*<td>@row["outtime"]</td>*@
+                                    <td>@item.Car_ID</td>
+                                    <td>@item.CarNum</td>
+                                    <td>@item.InTime.ToString("yyyy-MM-dd")</td>
                                 </tr>
                             }
                         </tbody>
+                        @*<tbody>
+                @foreach (System.Data.DataRow row in dt.Rows)
+                {
+                    <tr>
+                        <td>@row["car_id"]</td>
+                        <td>@row["carnum"]</td>
+                        <td>@row["intime"]</td>
+                        <td>@row["outtime"]</td>
+                    </tr>
+                }
+            </tbody>*@
                     </table>
+                    @if (Model.Count() == 0)
+                    {
+                        <div class="alert alert-info">
+                            데이터가 없습니다
+                        </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-@*<div>
-    <form id="form1" method="post" action="/home/tablechange">
-        <input name="car_id" type="text" value="1" />
-        <input name="carnum" type="text" value="1111" />
-
-        <button type="submit" , class="btn btn-sm btn-primary">변경 전송</button>
-    </form>
-</div>*@

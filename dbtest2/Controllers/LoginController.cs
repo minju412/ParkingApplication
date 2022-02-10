@@ -57,8 +57,8 @@ namespace dbtest2.Controllers
             // ID, 비밀번호 - 필수
             if (ModelState.IsValid)
             {
-                using (var db = new CarDb())
-                {
+                //using (var db = new CarDb())
+                //{
                     model.ConvertPassword(); //비밀번호 암호화
                     var user = model.GetLoginUser();
                     // Linq - 메서드 체이닝
@@ -85,7 +85,7 @@ namespace dbtest2.Controllers
 
                         return Redirect("/");
                     }
-                }
+                //}
                 //로그인에 실패했을 때
                 //ModelState.AddModelError(string.Empty, "사용자 ID 혹은 비밀번호가 올바르지 않습니다."); // asp-validation-summary 사용 불가 (Core용)
             }
@@ -126,6 +126,11 @@ namespace dbtest2.Controllers
                 // 실패
                 return Redirect($"/login/register?msg={HttpUtility.UrlEncode(ex.Message)}");
             }
+        }
+
+        public ActionResult UserProfile()
+        {
+            return View();
         }
 
     }
