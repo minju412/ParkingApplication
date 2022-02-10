@@ -119,11 +119,5 @@ namespace dbtest2.Controllers
             return View();
         }
 
-        public ActionResult LoginSuccess()
-        {
-            ViewBag.Message = "LoginSuccess Page";
-
-            return View();
-        }
     }
 }

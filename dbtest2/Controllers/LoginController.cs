@@ -9,7 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Web.Security;
 
 namespace dbtest2.Controllers
 {
@@ -18,14 +18,22 @@ namespace dbtest2.Controllers
 
         // [개발토끼]
 
-          //public ActionResult Logout()
-        //{
-        //    HttpContext.Session.Remove("USER_LOGIN_KEY");
+        public ActionResult Logout()
+        {
+            //HttpContext.Session.Remove("USER_LOGIN_KEY");
 
-        //    return RedirectToAction("Index", "Home");
-        //}
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName)
+            {
+                Expires = DateTime.Now.AddDays(-1)
+            };
+            HttpContext.Response.Cookies.Add(cookie);
+            //HttpContext.Current.Response.Cookies.Add(cookie);
 
-      
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
 
@@ -64,7 +72,18 @@ namespace dbtest2.Controllers
                         // 세션에 로그인 정보 담음
                         //HttpContext.Session.SetInt32("USER_LOGIN_KEY", user.User_Seq);
 
-                        return RedirectToAction("LoginSuccess", "Home");
+
+                        // 세션에 로그인 정보 담음
+                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName)
+                        {
+                            Domain = "localhost",
+                            Expires = DateTime.Now.AddHours(4),
+                            Value = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(model.Email, false, 60))
+                        };
+                        //HttpContext.Current.Response.Cookies.Add(cookie);
+                        HttpContext.Response.Cookies.Add(cookie);
+
+                        return Redirect("/");
                     }
                 }
                 //로그인에 실패했을 때
@@ -74,44 +93,6 @@ namespace dbtest2.Controllers
             return View();
         }
 
-
-
-
-        //[HttpPost]
-        //[Route("/login/login")]
-        //public ActionResult LoginProc(UserModel input) //fromform
-        //{
-        //    try
-        //    {
-        //        input.ConvertPassword(); //비밀번호 암호화
-        //        var user = input.GetLoginUser();
-
-        //        // 로그인 작업
-
-        //        var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
-        //        identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.User_Seq.ToString()));
-        //        identity.AddClaim(new Claim(ClaimTypes.Name, user.User_Name));
-        //        identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
-        //        identity.AddClaim(new Claim("LastCheckDateTime", DateTime.UtcNow.ToString("yyyyMMddHHmmss")));
-
-        //        var principal = new ClaimsPrincipal(identity);
-
-        //        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties
-        //        {
-        //            IsPersistent = false,
-        //            ExpiresUtc = DateTime.UtcNow.AddHours(4),
-        //            AllowRefresh = true
-        //        });
-
-        //        return Redirect("/");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Redirect($"/login/login?msg={HttpUtility.UrlEncode(ex.Message)}");
-        //    }
-
-        //    return View();
-        //}
 
         public ActionResult Register(string msg)
         {
