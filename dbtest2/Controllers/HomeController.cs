@@ -89,8 +89,6 @@ namespace dbtest2.Controllers
         //    return View();
         //}
 
-
-
         public ActionResult Create()
         {
             //var dt = new DataTable();
@@ -116,6 +114,11 @@ namespace dbtest2.Controllers
             //ViewData["dt"] = dt;
 
             //return Json(new { msg = "OK" }, JsonRequestBehavior.AllowGet);
+            return View();
+        }
+
+        public ActionResult UserProfile()
+        {
             return View();
         }
 
