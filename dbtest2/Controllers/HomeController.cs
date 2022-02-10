@@ -76,8 +76,6 @@ namespace dbtest2.Controllers
 
         //            cmd.CommandText = "INSERT INTO c_table (car_id,carnum,intime) VALUES (@car_id,@carnum,@intime)"; // (@car_id,@carnum,@intime,@outtime)";
 
-
-
         //            cmd.ExecuteNonQuery();
 
         //            //cmd.Parameters.Add(new OracleParameter("@carnum", carnum));
@@ -103,12 +101,10 @@ namespace dbtest2.Controllers
 
                 using (var cmd = new OracleCommand())
                 {
-
                     cmd.Connection = conn;
 
-                    cmd.CommandText = "INSERT INTO c_table VALUES (11,'1346','15:00','16:00')"; 
-                    //cmd.CommandText = "INSERT INTO c_table (carnum,intime,outtime) SELECT @car_id,@carnum,@intime,@outtime";
-
+                    cmd.CommandText = "INSERT INTO c_table VALUES (1,'1333','10:00','16:00')";
+                    //cmd.CommandText = "INSERT INTO c_table (car_id,carnum,intime,outtime) VALUES (C_TABLE_SEQ.NEXTVAL,:carnum,:intime,:outtime)";
 
                     cmd.ExecuteNonQuery();
 
@@ -123,9 +119,9 @@ namespace dbtest2.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult LoginSuccess()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "LoginSuccess Page";
 
             return View();
         }
