@@ -1,11 +1,13 @@
-﻿<section class="login-block">
+﻿@model dbtest2.ViewModel.LoginViewModel
+
+<section class="login-block">
     <!-- Container-fluid starts -->
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <!-- Authentication card start -->
 
-                <form class="md-float-material form-material">
+                <form class="md-float-material form-material" method="post" asp-controller="Login" asp-action="Login">
                     <div class="text-center">
                         <img src="/Content/img/login/logo.png" alt="logo.png">
                     </div>
@@ -16,33 +18,36 @@
                                     <h3 class="text-center">Sign In</h3>
                                 </div>
                             </div>
+
+                            @*<div class="text-danger" asp-validation-summary="ModelOnly"></div>*@
+
                             <div class="form-group form-primary">
                                 <label class="float-label">Email Address</label>
-                                <input type="text" name="email" class="form-control" placeholder="Your Email Address">
-                                <span class="form-bar"></span>
+                                <input type="text" asp-for="Email" name="email" class="form-control" placeholder="Your Email Address">
+                                <span class="form-bar" asp-validation-for="Email"></span>
                             </div>
                             <div class="form-group form-primary">
                                 <label class="float-label">Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Password">
-                                <span class="form-bar"></span>
+                                <input type="password" asp-for="Password" name="password" class="form-control" placeholder="Password">
+                                <span class="form-bar" asp-validation-for="Password"></span>
                             </div>
                             @*<div class="row m-t-25 text-left">
-                                <div class="col-12">
-                                    <div class="checkbox-fade fade-in-primary d-">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                            <span class="text-inverse">Remember me</span>
-                                        </label>
-                                    </div>
-                                    <div class="forgot-phone text-right f-right">
-                                        <a href="auth-reset-password.html" class="text-right f-w-600"> Forgot Password?</a>
-                                    </div>
-                                </div>
-                            </div>*@
+                    <div class="col-12">
+                        <div class="checkbox-fade fade-in-primary d-">
+                            <label>
+                                <input type="checkbox" value="">
+                                <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                <span class="text-inverse">Remember me</span>
+                            </label>
+                        </div>
+                        <div class="forgot-phone text-right f-right">
+                            <a href="auth-reset-password.html" class="text-right f-w-600"> Forgot Password?</a>
+                        </div>
+                    </div>
+                </div>*@
                             <div class="row m-t-30">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Sign in</button>
+                                    <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Sign in</button>
                                 </div>
                             </div>
                             <hr />

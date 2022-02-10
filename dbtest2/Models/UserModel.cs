@@ -32,7 +32,7 @@ namespace dbtest2.Models.Login
             this.Password = System.Convert.ToBase64String(hash);
         }
 
-        internal int Register()
+        internal int Register() // 사용자 등록
         {
             string sql = "INSERT INTO c_user (user_seq,user_name,email,password) VALUES (C_USER_SEQ.NEXTVAL,:user_name,:email,:password)";
 
@@ -45,5 +45,7 @@ namespace dbtest2.Models.Login
                 return Dapper.SqlMapper.Execute(conn, sql, this);
             }
         }
+
+        
     }
 }
