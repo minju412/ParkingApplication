@@ -314,9 +314,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\login\user.jpg" />
     <Content Include="Content\img\login\Logo-small-bottom.png" />
     <Content Include="Content\img\login\logo.png" />
-    <Content Include="Content\img\login\user_pic.jpg" />
     <Content Include="Content\light-bootstrap-dashboard\assets\css\bootstrap.min.css" />
     <Content Include="Content\light-bootstrap-dashboard\assets\css\demo.css" />
     <Content Include="Content\light-bootstrap-dashboard\assets\css\light-bootstrap-dashboard.css" />
@@ -423,6 +423,7 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
