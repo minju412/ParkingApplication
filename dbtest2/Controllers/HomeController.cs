@@ -27,13 +27,12 @@ namespace dbtest2.Controllers
             return View();
         }
     
-        [Authorize]
-        public ActionResult TableInsert_Input(string carnum, DateTime intime)
+        //[Authorize]
+        public ActionResult TableInsert_Input(string carnum)
         {
             var model = new Car();
 
             model.CarNum = carnum;
-            model.InTime = intime;
             //model.Reg_User = Convert.ToUInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
             //model.Reg_Username = User.Identity.Name;
 
