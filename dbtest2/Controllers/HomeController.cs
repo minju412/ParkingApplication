@@ -21,20 +21,20 @@ namespace dbtest2.Controllers
             return View(Car.GetList(search));
         }
 
-        //[Authorize] // 로그인 해야 입차 가능
+        [Authorize] // 로그인 해야 입차 가능
         public ActionResult TableInsert()
         {
             return View();
         }
-    
-        //[Authorize]
+
+        [Authorize]
         public ActionResult TableInsert_Input(string carnum)
         {
             var model = new Car();
 
             model.CarNum = carnum;
             //model.Reg_User = Convert.ToUInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            //model.Reg_Username = User.Identity.Name;
+            model.Owner = User.Identity.Name;
 
             model.Insert();
 

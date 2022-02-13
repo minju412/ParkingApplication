@@ -23,6 +23,8 @@ namespace dbtest2.Models
         //[DisplayName("출차시각")]
         public DateTime OutTime { get; set; }
 
+        public string Owner { get; set; }
+
         public static List<Car> GetList(string search)
         {
             string _strConn = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=ann;Password=111111;";
@@ -56,7 +58,8 @@ namespace dbtest2.Models
             using (var conn = new OracleConnection(_strConn))
             {
                 conn.Open();
-                string sql = "INSERT INTO c_table (car_id,carnum,intime) VALUES (C_TABLE_SEQ.NEXTVAL,:carnum,SYSDATE)";
+                //string sql = "INSERT INTO c_table (car_id,carnum,intime) VALUES (C_TABLE_SEQ.NEXTVAL,:carnum,SYSDATE)";
+                string sql = "INSERT INTO c_table (car_id,carnum,intime,owner) VALUES (C_TABLE_SEQ.NEXTVAL,:carnum,SYSDATE,:owner)";
 
                 return Dapper.SqlMapper.Execute(conn, sql, this);
             }

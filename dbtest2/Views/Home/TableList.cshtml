@@ -14,7 +14,7 @@
                         <th>ID</th>
                         <th>Car_Number</th>
                         <th>In_Time</th>
-                        <th>@*Out_Time*@</th>
+                        <th>Owner</th>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
@@ -23,6 +23,7 @@
                                 <td>@item.Car_ID</td>
                                 <td>@item.CarNum</td>
                                 <td>@item.InTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                <td>@item.Owner</td>
                             </tr>
                             }
                         </tbody>
