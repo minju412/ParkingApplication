@@ -15,9 +15,6 @@ namespace dbtest2.Controllers
 {
     public class LoginController : Controller
     {
-
-        // [개발토끼]
-
         public ActionResult Logout()
         {
             //HttpContext.Session.Remove("USER_LOGIN_KEY");
@@ -32,13 +29,6 @@ namespace dbtest2.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-
-        /////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////
-
-
-        // [bluepope]
 
         public ActionResult Index()
         {
