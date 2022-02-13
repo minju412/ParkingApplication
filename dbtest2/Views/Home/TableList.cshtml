@@ -19,11 +19,11 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>@item.Car_ID</td>
-                                    <td>@item.CarNum</td>
-                                    <td>@item.InTime.ToString("yyyy-MM-dd")</td>
-                                </tr>
+                            <tr>
+                                <td>@item.Car_ID</td>
+                                <td>@item.CarNum</td>
+                                <td>@item.InTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            </tr>
                             }
                         </tbody>
                         @*<tbody>

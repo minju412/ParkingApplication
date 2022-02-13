@@ -56,8 +56,7 @@ namespace dbtest2.Models
             using (var conn = new OracleConnection(_strConn))
             {
                 conn.Open();
-                //string sql = "INSERT INTO c_table (car_id,carnum,intime,outtime) VALUES (C_TABLE_SEQ.NEXTVAL,:carnum,:intime,:outtime)";
-                string sql = "INSERT INTO c_table VALUES (3,'3333',TO_DATE('2022-01-14 13:00:00', 'YYYY-MM-DD HH24:MI:SS' ),TO_DATE('2022-01-14 15:00:00', 'YYYY-MM-DD HH24:MI:SS' ))";
+                string sql = "INSERT INTO c_table (car_id,carnum,intime) VALUES (C_TABLE_SEQ.NEXTVAL,:carnum,SYSDATE)";
 
                 return Dapper.SqlMapper.Execute(conn, sql, this);
             }
