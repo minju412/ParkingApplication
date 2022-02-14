@@ -83,7 +83,7 @@ namespace dbtest2.Models
             }
         }
 
-        public int InsertOutTime() // 출차 시각 
+        public int UpdateOutTime() // 출차 시각 update
         {
             string _strConn = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=ann;Password=111111;";
             using (var conn = new OracleConnection(_strConn))
@@ -95,7 +95,21 @@ namespace dbtest2.Models
             }
         }
 
-        public int Delete()
+        public int UpdateFee() // 주차 요금 계산
+        {
+            //int fee = 1000;
+
+            string _strConn = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=ann;Password=111111;";
+            using (var conn = new OracleConnection(_strConn))
+            {
+                conn.Open();
+                string sql = "UPDATE c_table SET parking_fee=1000 WHERE carnum=:carnum";
+
+                return Dapper.SqlMapper.Execute(conn, sql, this);
+            }
+        }
+
+        public int Delete() // 출차
         {
             string _strConn = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=ann;Password=111111;";
             using (var conn = new OracleConnection(_strConn))
