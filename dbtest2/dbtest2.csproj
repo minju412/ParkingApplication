@@ -425,6 +425,7 @@
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Login\UserProfile.cshtml" />
     <Content Include="Views\Home\TableInsert.cshtml" />
+    <Content Include="Views\Home\TableDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

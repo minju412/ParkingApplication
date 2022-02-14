@@ -23,7 +23,26 @@ namespace dbtest2.Models
         //[DisplayName("출차시각")]
         public DateTime OutTime { get; set; }
 
-        public string Owner { get; set; }
+        public string Owner_Name { get; set; }
+
+        public int Owner { get; set; }
+
+        public int Parking_Fee { get; set; }
+
+
+        public static Car Get(string carnum)
+        {
+            string _strConn = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=ann;Password=111111;";
+            using (var conn = new OracleConnection(_strConn))
+            {
+                conn.Open();
+                string sql = "SELECT * FROM c_table C WHERE C.carnum = :carnum";
+
+                //return conn.QuerySingle<Car>(sql, new { carnum = carnum });
+                //return Dapper.SqlMapper.QuerySingle<Car>(conn, sql, new { carnum = carnum });
+                return Dapper.SqlMapper.QuerySingleOrDefault<Car>(conn, sql, new { carnum = carnum });
+            }
+        }
 
         public static List<Car> GetList(string search)
         {
@@ -58,19 +77,35 @@ namespace dbtest2.Models
             using (var conn = new OracleConnection(_strConn))
             {
                 conn.Open();
-                //string sql = "INSERT INTO c_table (car_id,carnum,intime) VALUES (C_TABLE_SEQ.NEXTVAL,:carnum,SYSDATE)";
-                string sql = "INSERT INTO c_table (car_id,carnum,intime,owner) VALUES (C_TABLE_SEQ.NEXTVAL,:carnum,SYSDATE,:owner)";
+                string sql = "INSERT INTO c_table (car_id,carnum,intime,owner_name) VALUES (C_TABLE_SEQ.NEXTVAL,:carnum,SYSDATE,:owner_name)";
 
                 return Dapper.SqlMapper.Execute(conn, sql, this);
             }
         }
 
+        public int InsertOutTime() // 출차 시각 
+        {
+            string _strConn = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=ann;Password=111111;";
+            using (var conn = new OracleConnection(_strConn))
+            {
+                conn.Open();
+                string sql = "UPDATE c_table SET outtime=SYSDATE WHERE carnum=:carnum";
 
+                return Dapper.SqlMapper.Execute(conn, sql, this);
+            }
+        }
 
+        public int Delete()
+        {
+            string _strConn = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=ann;Password=111111;";
+            using (var conn = new OracleConnection(_strConn))
+            {
+                conn.Open();
+                string sql = "DELETE FROM c_table WHERE carnum=:carnum";
 
-
-
-
+                return Dapper.SqlMapper.Execute(conn, sql, this);
+            }
+        }
 
     }
 }
