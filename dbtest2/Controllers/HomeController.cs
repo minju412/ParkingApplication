@@ -52,6 +52,9 @@ namespace dbtest2.Controllers
         public ActionResult TableDelete_Input(string carnum)
         {
             var model = Car.Get(carnum);
+
+            // 권한 확인
+
             //var userSeq = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             //if (model.Owner != userSeq)
@@ -59,7 +62,8 @@ namespace dbtest2.Controllers
             //    throw new Exception("수정할 수 없습니다.");
             //}
 
-            model.InsertOutTime();
+            model.UpdateOutTime();
+            model.UpdateFee();
             model.Delete();
 
             return Redirect("/home/TableList");
