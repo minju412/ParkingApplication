@@ -1,16 +1,28 @@
-﻿@model List<dbtest2.Models.Car>
+﻿@*@model List<dbtest2.Models.Car>*@
+
+@model dbtest2.Models.Car
+
 @*@{
-    string carnum = "1111";
-    //int ticket_id = 0;
-    //string title = "";
-
-    //if (Model?.Count > 0)
-    //{
-    //    ticket_id = Model[0].Ticket_Id;
-    //    title = Model[0].Title;
-
-    //}
+    ViewBag.Title = "TableDelete";
 }*@
+
+@*@{
+        var car = this.Model;
+    }*@
+
+
+@*@{
+        string carnum = "1111";
+        //int ticket_id = 0;
+        //string title = "";
+
+        //if (Model?.Count > 0)
+        //{
+        //    ticket_id = Model[0].Ticket_Id;
+        //    title = Model[0].Title;
+
+        //}
+    }*@
 
 <div class="container">
     <div class="row">
@@ -31,16 +43,13 @@
 
                         <div class="row m-t-30">
                             <div class="col-md-12">
-                                @*@foreach (var car in Model)
-                                {
-                                    if (car.CarNum.Equals(carnum))
-                                    {
-                                        <button type="submit" onclick="btn1_click(@car.Parking_Fee);" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">출차</button>
 
-                                    }
-                                }*@
+                                @*<button type="submit" onclick="btn1_click(@Model.Parking_Fee.ToString());" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">출차</button>*@
                                 <button type="submit" onclick="btn1_click('OK');" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">출차</button>
                                 @*<button type="submit" onclick="btn1_click();" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">출차</button>*@
+
+                                @*아래 실행 가능 - (*)*@
+                                @*<button type="submit" onclick="btn1_click(@ViewBag.Car.Parking_Fee.ToString());" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">출차</button>*@
                             </div>
                         </div>
                         <hr />
@@ -57,3 +66,9 @@
         alert("주차 요금은 " + s + "원 입니다.\n출차했습니다.");
     }
 </script>
+
+@*<script>
+            function btn1_click() {
+                alert("주차 요금은 @ViewBag.Car.Parking_Fee 원 입니다.\n출차했습니다.");
+            }
+    </script>*@

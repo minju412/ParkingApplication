@@ -1,9 +1,6 @@
-﻿using dbtest2.Context;
-using Oracle.ManagedDataAccess.Client;
+﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace dbtest2.Models
@@ -95,15 +92,13 @@ namespace dbtest2.Models
             }
         }
 
-        public int UpdateFee() // 주차 요금 계산
+        public int UpdateFee(int fee) // 주차 요금 계산 -> 매개변수 fee로 업데이트 예정..
         {
-            //int fee = 1000;
-
             string _strConn = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=ann;Password=111111;";
             using (var conn = new OracleConnection(_strConn))
             {
                 conn.Open();
-                string sql = "UPDATE c_table SET parking_fee=1000 WHERE carnum=:carnum";
+                string sql = "UPDATE c_table SET parking_fee=3000 WHERE carnum=:carnum";
 
                 return Dapper.SqlMapper.Execute(conn, sql, this);
             }
