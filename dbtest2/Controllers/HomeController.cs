@@ -1,9 +1,5 @@
-﻿using dbtest2.Context;
-using dbtest2.Models;
-using Oracle.ManagedDataAccess.Client;
+﻿using dbtest2.Models;
 using System;
-using System.Data;
-using System.Security.Claims;
 using System.Web.Mvc;
 
 
@@ -83,50 +79,59 @@ namespace dbtest2.Controllers
             //    throw new Exception("수정할 수 없습니다.");
             //}
 
-
             model.UpdateOutTime(); // db update - 출차시각 
             model = Car.Get(carnum); // 출차 시각 업데이트된 모델 받음
 
+            int fee = CalcFee(carnum);
 
-            // 주차 시간 계산 (분으로 환산)
-            //int min = (model.OutTime.Day * 24 * 60 + model.OutTime.Hour * 60 + model.OutTime.Minute) - (model.InTime.Day * 24 * 60 + model.InTime.Hour * 60 + model.InTime.Minute);
-
-            // 주차 요금 계산
-            int fee=2000;
-            //if (min >= 30) // 30분 기본요금 3000원
-            //{
-            //    fee = 3000;
-            //    min -= 30;
-            //}
-            //else
-            //{
-            //    if (min % 10 == 0) // 10분당 추가요금 1000원
-            //    {
-            //        fee = 1000 * (min / 10);
-            //    }
-            //    else
-            //    {
-            //        fee = 1000 * (min / 10) + 1000;
-            //    }
-            //}
-            model.UpdateFee(fee); // db update - 주차요금 
+            model.UpdateFee(fee); // db update - 주차요금 ///////////////////////////////////
             model = Car.Get(carnum); // 주차요금 업데이트된 모델 받음
-
-
-            // 뷰에 모델 전달
-            //ViewBag.Car = model;
-
-
-
-
-
-
 
             model.Delete(); // db delete
 
-            return Redirect("/home/TableList");
+            //return Json(new { msg = "주차 요금은 " + fee.ToString() + "원 입니다.\n출차합니다." });
+            return Json(new { msg = "주차 요금은 " + model.Parking_Fee + "원 입니다.\n출차합니다." });  ///////////////////////////////////
+            //return Redirect("/home/TableList");
 
             throw new Exception("잘못된 요청입니다");
+        }
+
+        // 주차 요금 계산
+        int CalcFee(string carnum)
+        {
+            // 30분 미만 기본요금 3000원
+            int basic_min = 30;
+            int basic_fee = 3000;
+
+            // 추가 10분당 1000원
+            int add_min = 10;
+            int add_fee = 1000;
+
+            var model = Car.Get(carnum);
+
+            // 주차 시간 계산 (분으로 환산)
+            int min = (model.OutTime.Day * 24 * 60 + model.OutTime.Hour * 60 + model.OutTime.Minute) - (model.InTime.Day * 24 * 60 + model.InTime.Hour * 60 + model.InTime.Minute);
+
+            // 주차 요금 계산
+            int fee = 0;
+            if (min >= basic_min) 
+            {
+                fee += basic_fee;
+                min -= basic_min;
+
+                if (min % add_min == 0) 
+                {
+                    fee += add_fee * (min / add_min);
+                }
+                else
+                {
+                    fee += add_fee * (min / add_min) + add_fee;
+                }
+            }
+            else 
+                fee = basic_fee;
+
+            return fee;
         }
 
     }

@@ -100,7 +100,7 @@ namespace dbtest2.Models
             using (var conn = new OracleConnection(_strConn))
             {
                 conn.Open();
-                string sql = "UPDATE c_table SET parking_fee=3000 WHERE carnum=:carnum";
+                string sql = "UPDATE c_table SET parking_fee=1000 WHERE carnum=:carnum AND flag='y'";
 
                 return Dapper.SqlMapper.Execute(conn, sql, this);
             }
@@ -113,7 +113,7 @@ namespace dbtest2.Models
             {
                 conn.Open();
                 //string sql = "DELETE FROM c_table WHERE carnum=:carnum";
-                string sql = "UPDATE c_table SET flag='n' WHERE carnum=:carnum";
+                string sql = "UPDATE c_table SET flag='n' WHERE carnum=:carnum AND flag='y'";
 
                 return Dapper.SqlMapper.Execute(conn, sql, this);
             }

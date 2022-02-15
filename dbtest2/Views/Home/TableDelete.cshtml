@@ -3,8 +3,8 @@
 @model dbtest2.Models.Car
 
 @*@{
-    ViewBag.Title = "TableDelete";
-}*@
+        ViewBag.Title = "TableDelete";
+    }*@
 
 @*@{
         var car = this.Model;
@@ -45,8 +45,8 @@
                             <div class="col-md-12">
 
                                 @*<button type="submit" onclick="btn1_click(@Model.Parking_Fee.ToString());" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">출차</button>*@
-                                <button type="submit" onclick="btn1_click('OK');" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">출차</button>
-                                @*<button type="submit" onclick="btn1_click();" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">출차</button>*@
+                                @*<button type="submit" onclick="btn1_click('OK');" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">출차</button>*@
+                                <button type="submit" onclick="btn1_click();" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">출차</button>
 
                                 @*아래 실행 가능 - (*)*@
                                 @*<button type="submit" onclick="btn1_click(@ViewBag.Car.Parking_Fee.ToString());" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">출차</button>*@
@@ -61,11 +61,38 @@
     </div>
 </div>
 
+
 <script>
-    function btn1_click(s) {
-        alert("주차 요금은 " + s + "원 입니다.\n출차했습니다.");
+    function btn1_click() {
+
+        // JQuery Ajax
+        $.ajax({
+            type: "POST",
+            url: "/home/TableDelete_Input",
+            dataType: "json",
+            data: {
+                "Parking_Fee": Parking_Fee
+            },
+            success: function (data) {
+                alert(data.msg);
+                //alert("주차 요금은 " + s + "원 입니다.\n출차했습니다.");
+                location.reload();
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        });
     }
 </script>
+
+
+
+
+@*<script>
+        function btn1_click(s) {
+            alert("주차 요금은 " + s + "원 입니다.\n출차했습니다.");
+        }
+    </script>*@
 
 @*<script>
             function btn1_click() {
