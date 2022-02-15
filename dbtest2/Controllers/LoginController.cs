@@ -42,7 +42,7 @@ namespace dbtest2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(LoginViewModel model)
+        public ActionResult Login(LoginViewModel model) //UserModel 말고 LoginViewModel 사용!
         {
             // ID, 비밀번호 - 필수
             if (ModelState.IsValid)
