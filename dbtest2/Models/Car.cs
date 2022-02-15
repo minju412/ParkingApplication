@@ -26,6 +26,8 @@ namespace dbtest2.Models
 
         public int Parking_Fee { get; set; }
 
+        public string Flag { get; set; }
+
 
         public static Car Get(string carnum)
         {
@@ -33,7 +35,7 @@ namespace dbtest2.Models
             using (var conn = new OracleConnection(_strConn))
             {
                 conn.Open();
-                string sql = "SELECT * FROM c_table C WHERE C.carnum = :carnum";
+                string sql = "SELECT * FROM c_table WHERE carnum=:carnum AND flag='y'";
 
                 //return conn.QuerySingle<Car>(sql, new { carnum = carnum });
                 //return Dapper.SqlMapper.QuerySingle<Car>(conn, sql, new { carnum = carnum });
@@ -47,7 +49,7 @@ namespace dbtest2.Models
             using (var conn = new OracleConnection(_strConn))
             {
                 conn.Open();
-                string sql = "SELECT * FROM c_table ORDER BY car_id ASC"; ;
+                string sql = "SELECT * FROM c_table WHERE flag='y' ORDER BY car_id ASC"; ;
 
                 return Dapper.SqlMapper.Query<Car>(conn, sql, new { search = search }).ToList();
             }
@@ -74,7 +76,7 @@ namespace dbtest2.Models
             using (var conn = new OracleConnection(_strConn))
             {
                 conn.Open();
-                string sql = "INSERT INTO c_table (car_id,carnum,intime,owner_name) VALUES (C_TABLE_SEQ.NEXTVAL,:carnum,SYSDATE,:owner_name)";
+                string sql = "INSERT INTO c_table (car_id,carnum,intime,owner_name,flag) VALUES (C_TABLE_SEQ.NEXTVAL,:carnum,SYSDATE,:owner_name,'y')";
 
                 return Dapper.SqlMapper.Execute(conn, sql, this);
             }
@@ -110,7 +112,8 @@ namespace dbtest2.Models
             using (var conn = new OracleConnection(_strConn))
             {
                 conn.Open();
-                string sql = "DELETE FROM c_table WHERE carnum=:carnum";
+                //string sql = "DELETE FROM c_table WHERE carnum=:carnum";
+                string sql = "UPDATE c_table SET flag='n' WHERE carnum=:carnum";
 
                 return Dapper.SqlMapper.Execute(conn, sql, this);
             }

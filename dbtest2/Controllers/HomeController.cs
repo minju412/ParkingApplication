@@ -92,7 +92,7 @@ namespace dbtest2.Controllers
             //int min = (model.OutTime.Day * 24 * 60 + model.OutTime.Hour * 60 + model.OutTime.Minute) - (model.InTime.Day * 24 * 60 + model.InTime.Hour * 60 + model.InTime.Minute);
 
             // 주차 요금 계산
-            int fee=0;
+            int fee=2000;
             //if (min >= 30) // 30분 기본요금 3000원
             //{
             //    fee = 3000;
