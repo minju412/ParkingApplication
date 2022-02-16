@@ -67,7 +67,8 @@ namespace dbtest2.Controllers
         }
 
         // 차량 번호는 Input에서 받음..
-        [Authorize]
+        //[Authorize]
+        //[HttpPost]
         public ActionResult TableDelete_Input(string carnum)
         {
             var model = Car.Get(carnum);
@@ -89,9 +90,20 @@ namespace dbtest2.Controllers
 
             model.Delete(); // db delete
 
+
+            // alert 후 redirect
+            return Content("<script> alert('" + fee.ToString() + "원 입니다. 출차합니다.'); location.href = '/home/TableList'; </script>");
+
+
+
+
             //return Json(new { msg = "주차 요금은 " + fee.ToString() + "원 입니다.\n출차합니다." });
-            return Json(new { msg = "주차 요금은 " + model.Parking_Fee + "원 입니다.\n출차합니다." });  ///////////////////////////////////
+            //return Content(model.Parking_Fee.ToString());  ///////////////////////////////////
+            //return Json(new { msg = "주차 요금은 " + model.Parking_Fee.ToString() + "원 입니다.\n출차합니다." });  ///////////////////////////////////
+            //return Json(new { msg = model.Parking_Fee.ToString() });  ///////////////////////////////////
+
             //return Redirect("/home/TableList");
+
 
             throw new Exception("잘못된 요청입니다");
         }
