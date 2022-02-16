@@ -35,7 +35,9 @@ namespace dbtest2.Controllers
 
             model.Insert();
 
-            return Redirect("/home/tablelist");
+            return Content("<script> alert('차량번호: " + model.CarNum + " 입차합니다.'); location.href = '/home/TableList'; </script>");
+
+            //return Redirect("/home/tablelist");
         }
 
         [Authorize]
@@ -68,7 +70,8 @@ namespace dbtest2.Controllers
             model.Delete(); // db delete
 
             // alert 후 redirect
-            return Content("<script> alert('" + fee.ToString() + "원 입니다. 출차합니다.'); location.href = '/home/TableList'; </script>");
+            return Content("<script> alert('차량번호: " + model.CarNum + " 출차합니다.\\n주차 요금은" + model.Parking_Fee.ToString() + "원 입니다.'); location.href = '/home/TableList'; </script>");
+            //return Content("<script> alert('" + fee.ToString() + "원 입니다. 출차합니다.'); location.href = '/home/TableList'; </script>");
 
             throw new Exception("잘못된 요청입니다");
         }
