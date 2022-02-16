@@ -93,13 +93,14 @@ namespace dbtest2.Controllers
         [HttpPost]
         public ActionResult Register(UserModel input)
         {
+
             try
             {
                 string password2 = Request.Form["password2"];
 
                 if (input.Password != password2)
                 {
-                    throw new Exception("password와 password2가 다릅니다");
+                    throw new Exception("Password와 Confirm Password가 다릅니다");
                 }
 
                 // 비밀번호 암호화
