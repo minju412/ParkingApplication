@@ -1,5 +1,6 @@
 ﻿using dbtest2.Models;
 using System;
+using System.Security.Claims;
 using System.Web.Mvc;
 
 
@@ -54,7 +55,7 @@ namespace dbtest2.Controllers
             //var userSeq = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
             //if (model.Owner != userSeq)
             //{
-            //    throw new Exception("수정할 수 없습니다.");
+            //    throw new Exception("출차할 수 없습니다.");
             //}
 
             model.UpdateOutTime(); // db update - 출차시각 

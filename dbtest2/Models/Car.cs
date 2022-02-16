@@ -37,8 +37,6 @@ namespace dbtest2.Models
                 conn.Open();
                 string sql = "SELECT * FROM c_table WHERE carnum=:carnum AND flag='y'";
 
-                //return conn.QuerySingle<Car>(sql, new { carnum = carnum });
-                //return Dapper.SqlMapper.QuerySingle<Car>(conn, sql, new { carnum = carnum });
                 return Dapper.SqlMapper.QuerySingleOrDefault<Car>(conn, sql, new { carnum = carnum });
             }
         }
