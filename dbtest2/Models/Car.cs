@@ -94,13 +94,13 @@ namespace dbtest2.Models
             }
         }
 
-        public int UpdateFee(int fee) // 주차 요금 계산 -> 매개변수 fee로 업데이트 예정..
+        public int UpdateFee(int fee) // 주차 요금 update
         {
             string _strConn = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=ann;Password=111111;";
             using (var conn = new OracleConnection(_strConn))
             {
                 conn.Open();
-                string sql = "UPDATE c_table SET parking_fee=1000 WHERE carnum=:carnum AND flag='y'";
+                string sql = "UPDATE c_table SET parking_fee=" + fee.ToString() + " WHERE carnum=:carnum AND flag='y'";
 
                 return Dapper.SqlMapper.Execute(conn, sql, this);
             }
